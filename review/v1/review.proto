@@ -44,6 +44,13 @@ service Review {
 			body: "*"
 		};
 	};
+	// 审核申诉
+	rpc AuditAppeal (AuditAppealRequest) returns (AuditAppealReply) {
+		option (google.api.http) = {
+			post: "v1/appeal/audit",
+			body: "*"
+		};
+	};
 }
 
 // 评价信息
@@ -120,4 +127,16 @@ message AppealReviewRequest {
 // 申诉评论的回复
 message AppealReviewReply {
 	int64 appeal_id = 1;
+}
+// 审核申诉的参数
+message AuditAppealRequest {
+	int64 appeal_id = 1 [(validate.rules).int64 = {gt: 0}];
+	int64 review_id = 2 [(validate.rules).int64 = {gt: 0}];
+	int32 status = 3 [(validate.rules).int32 = {gt: 0}];
+	string op_user = 4 [(validate.rules).string = {min_len: 2}];
+	string op_reason = 5 [(validate.rules).string = {min_len: 2}];
+	string op_remarks = 6 [(validate.rules).string = {min_len: 2}];
+}
+// 审核申诉的回复
+message AuditAppealReply {
 }
