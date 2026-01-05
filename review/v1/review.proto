@@ -135,7 +135,7 @@ message AuditAppealRequest {
 	int32 status = 3 [(validate.rules).int32 = {gt: 0}];
 	string op_user = 4 [(validate.rules).string = {min_len: 2}];
 	string op_reason = 5 [(validate.rules).string = {min_len: 2}];
-	string op_remarks = 6 [(validate.rules).string = {min_len: 2}];
+	optional string op_remarks = 6 [(validate.rules).string = {min_len: 2}];
 }
 // 审核申诉的回复
 message AuditAppealReply {
